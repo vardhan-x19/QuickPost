@@ -1,0 +1,26 @@
+.app-container{
+    display: flex;
+   }
+   .content{
+       width: 100%;
+   }
+   .header{
+       min-height: 20vh;
+   }
+   .sidebar{
+       height: 100vh;
+       margin-right: 10px;
+   }
+   .badge{
+       margin: 3px;
+   }
+   .msg{
+      margin-inline: auto;
+   }
+   .btnGroup{
+       display: flex;
+       gap: 10px;
+   }
+   .loadBtn{
+       margin-inline: auto;
+   }
