@@ -5,7 +5,7 @@ function SideBar({setItems,item}) {
     <div className={`d-flex flex-column flex-shrink-0 p-3 bg-light sidebar ${styles.sidebar}`}style={{width:"20vw"}}>
     <a xlinkHref="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg className="bi me-2" width="40" height="32"><use xlinkHref="#bootstrap"></use></svg>
-      <span className="fs-4">QuickPost</span>
+      <span className={styles.quickpost}>QuickPost</span>
     </a>
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
@@ -25,6 +25,12 @@ function SideBar({setItems,item}) {
         <Link to="/liked-post" className={`nav-link `}>
           <svg className="bi me-2" width="16" height="16"><use xlinkHref="#speedometer2"></use></svg>
           Liked
+        </Link>
+      </li>
+      <li >
+        <Link to="/saved" className={`nav-link `}>
+          <svg className="bi me-2" width="16" height="16"><use xlinkHref="#speedometer2"></use></svg>
+          SavedPost
         </Link>
       </li>
     </ul>

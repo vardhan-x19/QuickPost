@@ -1,8 +1,9 @@
 .app-container{
     display: flex;
    }
-   .content{
-       width: 100%;
+   .content {
+    margin-left: 21vw;
+    width: 100%;
    }
    .header{
        min-height: 20vh;

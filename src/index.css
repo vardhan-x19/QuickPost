@@ -13,3 +13,10 @@
 .search-display{
     display: flex;
 }
+.savedbtn{
+    width: 100%;
+    height: 5vh;
+}
+.savedbtn:hover{
+    cursor: pointer;
+}

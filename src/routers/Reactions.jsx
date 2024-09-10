@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./HomeComps.module.css";
-import EmptyMsg from '../Comp/EmptyMsg';
 import ReactionComp from '../Comp/ReactionComp';
 import EmptyLikeItems from '../Comp/EmptyLikeItems';
 function Reactions() {

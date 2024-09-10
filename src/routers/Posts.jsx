@@ -12,36 +12,45 @@ function Posts(params) {
     const tags=useRef();
     const btnFunc=()=>{
         console.log("fecth is called");
-        fetch('https://dummyjson.com/posts/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              title: title.current.value,
-              userId: id.current.value,
+        // fetch('https://dummyjson.com/posts/add', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //       title: title.current.value,
+        //       userId: id.current.value,
+        //      body:desc.current.value,
+        //      tags:tags.current.value.split(" "),
+        //      reactions: {likes: 0, dislikes: 0}
+        //     })
+        //   })
+        //   .then(res => res.json())
+        //   .then((data)=>{
+        //     console.log(data);
+        //     dispatch(addItems(data));
+        //    });
+        const data ={
+             title: title.current.value,
+             userId: id.current.value,
              body:desc.current.value,
              tags:tags.current.value.split(" "),
              reactions: {likes: 0, dislikes: 0}
-            })
-          })
-          .then(res => res.json())
-          .then((data)=>{
-            console.log(data);
-            dispatch(addItems(data));
-           });
+        }
+        dispatch(addItems(data));
            naviGate("/")
         }
            
     return (
         <form className={styles.post} onSubmit={(e)=>e.preventDefault()}>
+            <h3>Create Post</h3>
     <div class="mb-3">
         <label for="exampleInputProfileId" class="form-label">Enter Profile Id </label>
-        <input type="text" ref={id} class="form-control" id="exampleInputEmail1" placeholder="Ex:nter id from 1 to 100"  aria-describedby="emailHelp"/>
-        <div id="emailHelp" class="form-text">Enter your official Unique Id for Now enter any No 0-100</div>
+        <input type="text" ref={id} class="form-control" id="exampleInputEmail1"   aria-describedby="emailHelp"/>
+        <div id="emailHelp" class="form-text">Enter your official Unique Id </div>
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Enter Your Title</label>
         <input type="text" ref={title} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Description Of the post</label>

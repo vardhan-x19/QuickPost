@@ -2,32 +2,32 @@ import { CiCircleRemove } from "react-icons/ci";
 import { SlLike } from "react-icons/sl";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { SlDislike } from "react-icons/sl";
-import { useDispatch } from 'react-redux';
-import { removeLikeItems } from "../Store/defItems";
-import { useSelector } from "react-redux";
+import { deleteItems } from "../Store/defItems";
+import { likedPost } from "../Store/defItems";
+import { addliked } from "../Store/likedItems";
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from "react";
 import { CiBookmark } from "react-icons/ci";
+import { disLikePost } from "../Store/defItems";
 import { IoBookmark } from "react-icons/io5";
 import { savingItems } from "../Store/defItems";
 import { removeSave } from "../Store/defItems";
-import { likedPost } from "../Store/defItems";
-import { disLikePost } from "../Store/defItems";
-function ReactionComp({item,key}) {
+function SearchCard({item,key}) {
   
-
     const dispatch=useDispatch();
     
     const removeItems=()=>{
-      dispatch(removeLikeItems(item.userId));
+      dispatch(deleteItems(item.userId));
+    }
+    
+    const likedposts=()=>{
+     dispatch(likedPost({ postId: item.userId, Postlikes: item.reactions.likes ,comp:item}));
+     dispatch(addliked(item));
+    }
+    const disLikePosts=()=>{
+     dispatch(disLikePost({ postId: item.userId, PostDislikes: item.reactions.dislikes , Postlikes: item.reactions.likes,comp:item}));
     }
    
-    const likedposts=()=>{
-      dispatch(likedPost({ postId: item.userId, Postlikes: item.reactions.likes+1 ,comp:item}));
-      dispatch(addliked(item));
-     }
-     const disLikePosts=()=>{
-      dispatch(disLikePost({ postId: item.userId, PostDislikes: item.reactions.dislikes , Postlikes: item.reactions.likes+1,comp:item}));
-     }
-
     let checked=useSelector(store=>store.defPostItems.saved[item.userId]);
     const savedBtn=()=>{
       dispatch(savingItems({postId:item.userId,comp:item}));
@@ -44,7 +44,7 @@ function ReactionComp({item,key}) {
         <p class="card-text"> {item.body} </p>
         <div className="btnGroup">
         <button type="button" class="btn btn-primary"   onClick={likedposts} >
-        <SlLike /> <span  class="badge text-bg-secondary">{item.reactions.likes+1} </span>
+        <SlLike /> <span  class="badge text-bg-secondary " >{item.reactions.likes} </span>
         </button>
         <button onClick={disLikePosts}  type="button" class="btn btn-info"><SlDislike />   <span class="badge text-bg-primary">{item.reactions.dislikes} </span></button>
         <span  >{!checked ?<CiBookmark className="savedbtn" onClick={savedBtn}></CiBookmark>:<IoBookmark className="savedbtn" onClick={remSavedbtn} />}</span> 
@@ -55,4 +55,4 @@ function ReactionComp({item,key}) {
     </div>
     </>
 }
-export default ReactionComp;
+export default SearchCard;

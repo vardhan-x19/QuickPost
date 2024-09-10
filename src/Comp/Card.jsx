@@ -7,6 +7,11 @@ import { likedPost } from "../Store/defItems";
 import { addliked } from "../Store/likedItems";
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from "react";
+import { CiBookmark } from "react-icons/ci";
+import { disLikePost } from "../Store/defItems";
+import { IoBookmark } from "react-icons/io5";
+import { savingItems } from "../Store/defItems";
+import { removeSave } from "../Store/defItems";
 function Card({item,key}) {
   
     const dispatch=useDispatch();
@@ -16,11 +21,21 @@ function Card({item,key}) {
     }
     
     const likedposts=()=>{
-     console.log("del btn cliked",item.userId,item.reactions.likes);
      dispatch(likedPost({ postId: item.userId, Postlikes: item.reactions.likes ,comp:item}));
      dispatch(addliked(item));
     }
-
+    const disLikePosts=()=>{
+     dispatch(disLikePost({ postId: item.userId, PostDislikes: item.reactions.dislikes , Postlikes: item.reactions.likes,comp:item}));
+    }
+   
+    let checked=useSelector(store=>store.defPostItems.saved[item.userId]);
+    const savedBtn=()=>{
+      dispatch(savingItems({postId:item.userId,comp:item}));
+    }
+    
+    const remSavedbtn=()=>{
+      dispatch(removeSave({postId:item.userId,comp:item}));
+    }
     return <>
     <div class="card" style={{width: "18rem"} }  >
     <div class="card-body"  >
@@ -31,7 +46,8 @@ function Card({item,key}) {
         <button type="button" class="btn btn-primary"   onClick={likedposts} >
         <SlLike /> <span  class="badge text-bg-secondary " >{item.reactions.likes} </span>
         </button>
-        <button  type="button" class="btn btn-info"><SlDislike />   <span class="badge text-bg-primary">{item.reactions.dislikes} </span></button>
+        <button onClick={disLikePosts}  type="button" class="btn btn-info"><SlDislike />   <span class="badge text-bg-primary">{item.reactions.dislikes} </span></button>
+        <span  >{!checked ?<CiBookmark className="savedbtn" onClick={savedBtn}></CiBookmark>:<IoBookmark className="savedbtn" onClick={remSavedbtn} />}</span> 
         </div>
         <br/>
         {item.tags.map((item)=><span class="badge text-bg-secondary">{item}</span>)}
